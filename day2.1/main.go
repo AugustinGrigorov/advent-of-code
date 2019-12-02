@@ -21,7 +21,8 @@ func main() {
       fmt.Println(err)
     }
   }
-
+	outputArray[1] = 12
+	outputArray[2] = 2
   fmt.Println(executeIndex(0, outputArray)[0])
 }
 
