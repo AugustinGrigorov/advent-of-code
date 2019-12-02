@@ -21,8 +21,8 @@ func main() {
       fmt.Println(err)
     }
   }
-  
-  fmt.Println(executeIndex(0, outputArray))
+
+  fmt.Println(executeIndex(0, outputArray)[0])
 }
 
 func executeIndex(index int, array []int) []int {
