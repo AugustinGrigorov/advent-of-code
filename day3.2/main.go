@@ -33,7 +33,7 @@ func main() {
 
 	input, err := ioutil.ReadFile("input.txt")
 	if err != nil {
-		fmt.Println(err)
+		panic(err)
 	}
 	inputString := string(input)
 	inputArray := strings.Split(strings.Trim(inputString, "\n"), "\n")
@@ -71,10 +71,10 @@ func main() {
 }
 
 func addLineCoordinatesAndDistances(currentPosition coordinates, lineFragmentSpec string, currentDistance int, coordinateAndDistance map[string]int) (coordinates, int) {
-	distance, err := strconv.Atoi(lineFragmentSpec[1:])
 	var newPosition coordinates
+	distance, err := strconv.Atoi(lineFragmentSpec[1:])
 	if err != nil {
-		fmt.Printf("can't parse distance from %v %v \n", lineFragmentSpec, err)
+		panic(err)
 	}
 	switch lineFragmentSpec[0] {
 	case 'L':
