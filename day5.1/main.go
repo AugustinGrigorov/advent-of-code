@@ -86,8 +86,6 @@ func executeIndex(index int, array []int) []int {
 		return executeIndex(index+2, array)
 	case 99:
 		return array
-	default:
-		fmt.Println("likely error", index, operator)
 	}
 	return array
 }
