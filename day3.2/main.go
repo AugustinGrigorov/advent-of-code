@@ -12,21 +12,6 @@ type coordinates struct {
 	y int
 }
 
-type line struct {
-	beginning coordinates
-	end       coordinates
-}
-
-type dimentionBounds struct {
-	lowerBound int
-	upperBound int
-}
-
-type bounds struct {
-	x dimentionBounds
-	y dimentionBounds
-}
-
 func main() {
 	wireOnePointsAndDistanceFromStart := make(map[string]int)
 	wireTwoPointsAndDistanceFromStart := make(map[string]int)
