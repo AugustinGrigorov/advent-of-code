@@ -1,3 +1,4 @@
+```
 --- Part Two ---
 
 It turns out that this circuit is very timing-sensitive; you actually need to minimize the signal delay.
@@ -27,3 +28,4 @@ U62,R66,U55,R34,D71,R55,D58,R83 = 610 steps
 R98,U47,R26,D63,R33,U87,L62,D20,R33,U53,R51
 U98,R91,D20,R16,D67,R40,U7,R15,U6,R7 = 410 steps
 What is the fewest combined steps the wires must take to reach an intersection?
+```
