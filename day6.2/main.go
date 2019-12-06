@@ -10,9 +10,7 @@ const santa = "SAN"
 const you = "YOU"
 
 type celestialBody struct {
-	name          string
-	bodiesInOrbit []*celestialBody
-	inOrbitOf     []*celestialBody
+	adjacentBodies []*celestialBody
 }
 
 func main() {
@@ -28,8 +26,8 @@ func main() {
 		celestialBodies := strings.Split(celestialBodyConnection, ")")
 		bodyOrbited := createBodyIfNoneExists(celestialBodies[0], bodiesLookup)
 		bodyOrbiting := createBodyIfNoneExists(celestialBodies[1], bodiesLookup)
-		bodyOrbited.bodiesInOrbit = append(bodyOrbited.bodiesInOrbit, bodyOrbiting)
-		bodyOrbiting.inOrbitOf = append(bodyOrbiting.inOrbitOf, bodyOrbited)
+		bodyOrbited.adjacentBodies = append(bodyOrbited.adjacentBodies, bodyOrbiting)
+		bodyOrbiting.adjacentBodies = append(bodyOrbiting.adjacentBodies, bodyOrbited)
 	}
 
 	fmt.Println(findDistanceBetween(bodiesLookup[santa], bodiesLookup[you]))
@@ -37,9 +35,7 @@ func main() {
 
 func createBodyIfNoneExists(name string, bodiesLookup map[string]*celestialBody) *celestialBody {
 	if bodiesLookup[name] == nil {
-		newBody := celestialBody{
-			name: name,
-		}
+		newBody := celestialBody{}
 		bodiesLookup[name] = &newBody
 		return &newBody
 	}
@@ -63,7 +59,7 @@ func findDistanceBetween(bodyOne, bodyTwo *celestialBody) int {
 			return bodyOneConnectionsAndDistances[connectionAtOne] + bodyTwoConnectionsAndDistances[connectionAtOne] - 2
 		}
 
-		bodyTwoNodesToAdd, connectionAtTwo := visit(currentBodyTwoEntry, bodyTwoConnectionsAndDistances, bodyOneConnectionsAndDistances[currentBodyOneEntry]+1, bodyOneConnectionsAndDistances)
+		bodyTwoNodesToAdd, connectionAtTwo := visit(currentBodyTwoEntry, bodyTwoConnectionsAndDistances, bodyTwoConnectionsAndDistances[currentBodyTwoEntry]+1, bodyOneConnectionsAndDistances)
 		if connectionAtTwo != nil {
 			return bodyOneConnectionsAndDistances[connectionAtTwo] + bodyTwoConnectionsAndDistances[connectionAtTwo] - 2
 		}
@@ -83,20 +79,17 @@ func findDistanceBetween(bodyOne, bodyTwo *celestialBody) int {
 }
 
 func visit(body *celestialBody, bodiesVisited map[*celestialBody]int, distance int, bodiesToSearchIn map[*celestialBody]int) ([]*celestialBody, *celestialBody) {
-	fmt.Println("Visited a node", body.name, distance)
-	var adjacentBodies []*celestialBody
 	var newBodiesToVisit []*celestialBody
-	adjacentBodies = append(adjacentBodies, body.inOrbitOf...)
-	adjacentBodies = append(adjacentBodies, body.bodiesInOrbit...)
-	for _, adjacentBody := range adjacentBodies {
+
+	for _, adjacentBody := range body.adjacentBodies {
 		if _, ok := bodiesVisited[adjacentBody]; !ok {
 			bodiesVisited[adjacentBody] = distance
 			newBodiesToVisit = append(newBodiesToVisit, adjacentBody)
 		}
 		if _, ok := bodiesToSearchIn[adjacentBody]; ok {
-			fmt.Println("Found a path")
 			return nil, adjacentBody
 		}
 	}
+
 	return newBodiesToVisit, nil
 }
