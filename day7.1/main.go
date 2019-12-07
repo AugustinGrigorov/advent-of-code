@@ -11,7 +11,6 @@ import (
 func main() {
 	var possibleOptions [][]int
 	var wg sync.WaitGroup
-	outputChannel := make(chan int)
 
 	data, err := ioutil.ReadFile("input.txt")
 	if err != nil {
@@ -29,6 +28,7 @@ func main() {
 
 	generateAllInputOptions(5, []int{0, 1, 2, 3, 4}, &possibleOptions)
 	wg.Add(len(possibleOptions))
+	outputChannel := make(chan int, len(possibleOptions))
 
 	for _, option := range possibleOptions {
 		go func(option []int) {
@@ -40,7 +40,6 @@ func main() {
 			}
 			outputChannel <- output
 			wg.Done()
-			fmt.Println("DONE")
 		}(option)
 	}
 
@@ -54,7 +53,6 @@ func main() {
 		}
 	}
 	fmt.Println(highestOutput)
-
 }
 
 func executeIndex(index int, array []int, input int, output *int, secondInput bool) []int {
