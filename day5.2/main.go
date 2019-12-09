@@ -44,8 +44,10 @@ func executeIndex(index int, array []int) []int {
 			param2 = array[array[index+2]]
 		}
 		if thirdParamImmediateMode {
+			fmt.Printf("Executing operator %v with params %v %v %v\n", operator%100, param1, param2, array[index+3])
 			array[index+3] = param1 + param2
 		} else {
+			fmt.Printf("Executing operator %v with params %v %v %v\n", operator%100, param1, param2, array[array[index+3]])
 			array[array[index+3]] = param1 + param2
 		}
 		return executeIndex(index+4, array)
@@ -62,24 +64,31 @@ func executeIndex(index int, array []int) []int {
 			param2 = array[array[index+2]]
 		}
 		if thirdParamImmediateMode {
+			fmt.Printf("Executing operator %v with params %v %v %v\n", operator%100, param1, param2, array[index+3])
 			array[index+3] = param1 * param2
 		} else {
+			fmt.Printf("Executing operator %v with params %v %v %v\n", operator%100, param1, param2, array[array[index+3]])
 			array[array[index+3]] = param1 * param2
+
 		}
 		return executeIndex(index+4, array)
 	case 3:
 		firstParamImmediateMode, _, _ := getFlags(array[index])
 		if firstParamImmediateMode {
+			fmt.Printf("Executing operator %v with params %v\n", operator%100, array[index+1])
 			array[index+1] = input
 		} else {
+			fmt.Printf("Executing operator %v with params %v\n", operator%100, array[array[index+1]])
 			array[array[index+1]] = input
 		}
 		return executeIndex(index+2, array)
 	case 4:
 		firstParamImmediateMode, _, _ := getFlags(array[index])
 		if firstParamImmediateMode {
+			fmt.Printf("Executing operator %v with params %v\n", operator%100, param1)
 			param1 = array[index+1]
 		} else {
+			fmt.Printf("Executing operator %v with params %v\n", operator%100, param1)
 			param1 = array[array[index+1]]
 		}
 		fmt.Println(param1)
@@ -96,6 +105,7 @@ func executeIndex(index int, array []int) []int {
 		} else {
 			param2 = array[array[index+2]]
 		}
+		fmt.Printf("Executing operator %v with params %v %v\n", operator%100, param1, param2)
 		if param1 > 0 {
 			return executeIndex(param2, array)
 		}
@@ -112,6 +122,7 @@ func executeIndex(index int, array []int) []int {
 		} else {
 			param2 = array[array[index+2]]
 		}
+		fmt.Printf("Executing operator %v with params %v %v\n", operator%100, param1, param2)
 		if param1 == 0 {
 			return executeIndex(param2, array)
 		}
@@ -133,8 +144,10 @@ func executeIndex(index int, array []int) []int {
 			value = 1
 		}
 		if thirdParamImmediateMode {
+			fmt.Printf("Executing operator %v with params %v %v %v\n", operator%100, param1, param2, array[index+3])
 			array[index+3] = value
 		} else {
+			fmt.Printf("Executing operator %v with params %v %v %v\n", operator%100, param1, param2, array[array[index+3]])
 			array[array[index+3]] = value
 		}
 		return executeIndex(index+4, array)
@@ -155,8 +168,10 @@ func executeIndex(index int, array []int) []int {
 			value = 1
 		}
 		if thirdParamImmediateMode {
+			fmt.Printf("Executing operator %v with params %v %v %v\n", operator%100, param1, param2, array[index+3])
 			array[index+3] = value
 		} else {
+			fmt.Printf("Executing operator %v with params %v %v %v\n", operator%100, param1, param2, array[array[index+3]])
 			array[array[index+3]] = value
 		}
 		return executeIndex(index+4, array)
