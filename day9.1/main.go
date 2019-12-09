@@ -36,64 +36,57 @@ func main() {
 
 func executeIndex(index, relativeBase int, instructions []int) []int {
 	operator := instructions[index]
-
 	switch operator % 100 {
 	case 1:
 		flags := getFlags(operator)
 		params := getParameters(index, relativeBase, instructions, flags, 3)
-		fmt.Printf("Executing operator %v with params %v %v %v\n", operator%100, *params[0], *params[1], *params[2])
 		*params[2] = *params[0] + *params[1]
 		return executeIndex(index+4, relativeBase, instructions)
 	case 2:
 		flags := getFlags(operator)
 		params := getParameters(index, relativeBase, instructions, flags, 3)
-		fmt.Printf("Executing operator %v with params %v %v %v\n", operator%100, *params[0], *params[1], *params[2])
 		*params[2] = *params[0] * *params[1]
 		return executeIndex(index+4, relativeBase, instructions)
 	case 3:
 		flags := getFlags(operator)
 		params := getParameters(index, relativeBase, instructions, flags, 1)
-		fmt.Printf("Executing operator %v with params %v\n", operator%100, *params[0])
 		*params[0] = input
 		return executeIndex(index+2, relativeBase, instructions)
 	case 4:
 		flags := getFlags(operator)
 		params := getParameters(index, relativeBase, instructions, flags, 1)
 		fmt.Println(*params[0])
-		fmt.Printf("Executing operator %v with params %v\n", operator%100, *params[0])
 		return executeIndex(index+2, relativeBase, instructions)
 	case 5:
 		flags := getFlags(operator)
 		params := getParameters(index, relativeBase, instructions, flags, 2)
 		if *params[0] > 0 {
-			fmt.Printf("Executing operator %v with params %v %v\n", operator%100, *params[0], *params[1])
 			return executeIndex(*params[1], relativeBase, instructions)
 		}
-		fmt.Printf("Executing operator %v with params %v %v\n", operator%100, *params[0], *params[1])
 		return executeIndex(index+3, relativeBase, instructions)
 	case 6:
 		flags := getFlags(operator)
 		params := getParameters(index, relativeBase, instructions, flags, 2)
 		if *params[0] == 0 {
-			fmt.Printf("Executing operator %v with params %v %v\n", operator%100, *params[0], *params[1])
 			return executeIndex(*params[1], relativeBase, instructions)
 		}
-		fmt.Printf("Executing operator %v with params %v %v\n", operator%100, *params[0], *params[1])
 		return executeIndex(index+3, relativeBase, instructions)
 	case 7:
 		flags := getFlags(operator)
 		params := getParameters(index, relativeBase, instructions, flags, 3)
-		fmt.Printf("Executing operator %v with params %v %v %v\n", operator%100, *params[0], *params[1], *params[2])
 		if *params[0] < *params[1] {
 			*params[2] = 1
+		} else {
+			*params[2] = 0
 		}
 		return executeIndex(index+4, relativeBase, instructions)
 	case 8:
 		flags := getFlags(operator)
 		params := getParameters(index, relativeBase, instructions, flags, 3)
-		fmt.Printf("Executing operator %v with params %v %v %v\n", operator%100, *params[0], *params[1], *params[2])
 		if *params[0] == *params[1] {
 			*params[2] = 1
+		} else {
+			*params[2] = 0
 		}
 		return executeIndex(index+4, relativeBase, instructions)
 	case 99:
