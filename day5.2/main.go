@@ -65,6 +65,7 @@ func executeIndex(index int, array []int) []int {
 			array[index+3] = param1 * param2
 		} else {
 			array[array[index+3]] = param1 * param2
+
 		}
 		return executeIndex(index+4, array)
 	case 3:
