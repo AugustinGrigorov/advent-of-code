@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-const input = 1
+const input = 2
 
 type opMode int64
 
