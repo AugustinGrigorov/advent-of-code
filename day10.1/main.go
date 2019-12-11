@@ -3,40 +3,98 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
+	"math"
+	"sort"
 	"strings"
 )
 
 type coordinates struct {
-	x, y int
+	x, y float64
 }
 
 type asteroid struct {
 	visibleAsteroids      int
-	tangentsOfObstruction map[int]bool
+	tangentsOfObstruction map[string]bool
 }
 
+type distance struct {
+	coordinates
+	value float64
+}
+
+type byDistance []distance
+
+func (d byDistance) Len() int           { return len(d) }
+func (d byDistance) Swap(i, j int)      { d[i], d[j] = d[j], d[i] }
+func (d byDistance) Less(i, j int) bool { return d[i].value < d[j].value }
+
 func main() {
+	var asteroidCoordinates []coordinates
+	var asteroids []asteroid
+
 	input, err := ioutil.ReadFile("input.txt")
 	if err != nil {
 		panic(err)
 	}
-
 	inputString := string(input)
 	inputArray := strings.Split(strings.Trim(inputString, "\n"), "\n")
-	spaceMap := make([][]rune, len(inputArray))
-	for x, _ := range spaceMap {
-		spaceMap[x] = make([]rune, len(inputArray))
-		for y, el := range inputArray[x] {
-			spaceMap[x][y] = el
+
+	for y, row := range inputArray {
+		for x, el := range row {
+			if el == '#' {
+				asteroidCoordinates = append(asteroidCoordinates, coordinates{float64(x), float64(y)})
+			}
 		}
 	}
-	fmt.Println(spaceMap)
+
+	for _, firstCoordinates := range asteroidCoordinates {
+		var distances []distance
+		currentAsteroid := asteroid{
+			tangentsOfObstruction: make(map[string]bool),
+		}
+		for _, secondCoordinates := range asteroidCoordinates {
+			if firstCoordinates != secondCoordinates {
+				distances = append(distances, distance{secondCoordinates, findDistance(firstCoordinates, secondCoordinates)})
+			}
+		}
+		sort.Sort(byDistance(distances))
+		for _, distance := range distances {
+			quadrant := getQuadrant(firstCoordinates, distance.coordinates)
+			tangent := (firstCoordinates.x - distance.x) / (firstCoordinates.y - distance.y)
+			if !currentAsteroid.tangentsOfObstruction[fmt.Sprintf("%v_%v", quadrant, tangent)] {
+				currentAsteroid.visibleAsteroids++
+				currentAsteroid.tangentsOfObstruction[fmt.Sprintf("%v_%v", quadrant, tangent)] = true
+			}
+		}
+		asteroids = append(asteroids, currentAsteroid)
+	}
+
+	var mostVisibleAsteroids int
+	for _, asteroid := range asteroids {
+		if asteroid.visibleAsteroids > mostVisibleAsteroids {
+			mostVisibleAsteroids = asteroid.visibleAsteroids
+		}
+	}
+
+	fmt.Println(mostVisibleAsteroids)
 }
 
-func findElementsAtDistance(point coordinates, distance int, spaceMap [][]rune) []coordinates {
-	for i := -distance; i < distance; i++ {
-		for j := -distance; j < distance; j++ {
-			fmt.Println(point.x+i, point.y+j)
-		}
+func findDistance(a, b coordinates) float64 {
+	return math.Sqrt(math.Pow(a.x-b.x, 2) + math.Pow(a.y-b.y, 2))
+}
+
+func getQuadrant(a, b coordinates) int {
+	if a.x > b.x && a.y > b.y {
+		return 1
 	}
+	if a.x < b.x && a.y > b.y {
+		return 2
+	}
+	if a.x > b.x && a.y < b.y {
+		return 3
+	}
+	if a.x < b.x && a.y < b.y {
+		return 4
+	}
+	return 0
 }
