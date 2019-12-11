@@ -24,7 +24,7 @@ type robot struct {
 	coordinatesPainted   map[string]int64
 	currentDirection     int
 	currentCoordinates   coordinates
-	currentTile          int
+	currentTile          int64
 }
 
 func main() {
@@ -74,6 +74,7 @@ func (r *robot) executeCommand(command int64) {
 		default:
 			panic("invalid direction")
 		}
+		r.currentTile = r.coordinatesPainted[fmt.Sprintf("%v:%v", r.currentCoordinates.x, r.currentCoordinates.y)]
 	case 0:
 		r.coordinatesPainted[fmt.Sprintf("%v:%v", r.currentCoordinates.x, r.currentCoordinates.y)] = command
 	}
@@ -101,7 +102,7 @@ func executeIndex(index, relativeBase int64, instructions map[int64]int64, r *ro
 		fmt.Println("read")
 		flags := getFlags(operator)
 		paramIndexes := getParameterIndexes(index, relativeBase, instructions, flags, 1)
-		instructions[paramIndexes[0]] = int64(r.currentTile)
+		instructions[paramIndexes[0]] = r.currentTile
 		return executeIndex(index+2, relativeBase, instructions, r)
 	case 4:
 		flags := getFlags(operator)
