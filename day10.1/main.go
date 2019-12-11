@@ -30,7 +30,6 @@ func (d byDistance) Less(i, j int) bool { return d[i].value < d[j].value }
 
 func main() {
 	var asteroidCoordinates []coordinates
-	var asteroids []asteroid
 
 	input, err := ioutil.ReadFile("input.txt")
 	if err != nil {
@@ -46,6 +45,8 @@ func main() {
 			}
 		}
 	}
+
+	var mostVisibleAsteroids int
 
 	for _, firstCoordinates := range asteroidCoordinates {
 		var distances []distance
@@ -66,13 +67,8 @@ func main() {
 				currentAsteroid.tangentsOfObstruction[fmt.Sprintf("%v_%v", quadrant, tangent)] = true
 			}
 		}
-		asteroids = append(asteroids, currentAsteroid)
-	}
-
-	var mostVisibleAsteroids int
-	for _, asteroid := range asteroids {
-		if asteroid.visibleAsteroids > mostVisibleAsteroids {
-			mostVisibleAsteroids = asteroid.visibleAsteroids
+		if currentAsteroid.visibleAsteroids > mostVisibleAsteroids {
+			mostVisibleAsteroids = currentAsteroid.visibleAsteroids
 		}
 	}
 
