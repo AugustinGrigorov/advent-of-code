@@ -20,11 +20,12 @@ type coordinates struct {
 }
 
 type robot struct {
-	instructionsExecuted int
-	coordinatesPainted   map[string]int64
-	currentDirection     int
-	currentCoordinates   coordinates
-	currentTile          int64
+	instructionsExecuted                               int
+	coordinatesPainted                                 map[string]int64
+	currentDirection                                   int
+	currentCoordinates                                 coordinates
+	currentTile                                        int64
+	lowerBoundX, lowerBoundY, upperBoundX, upperBoundY int
 }
 
 func main() {
@@ -44,10 +45,21 @@ func main() {
 
 	rob := robot{
 		coordinatesPainted: make(map[string]int64),
+		currentTile:        1,
 	}
 
 	executeIndex(0, 0, output, &rob)
-	fmt.Println(len(rob.coordinatesPainted))
+
+	for y := rob.upperBoundY; y >= rob.lowerBoundY; y-- {
+		fmt.Println()
+		for x := rob.lowerBoundX; x < rob.upperBoundX; x++ {
+			if rob.coordinatesPainted[fmt.Sprintf("%v:%v", x, y)] != 0 {
+				fmt.Print("#")
+			} else {
+				fmt.Print(" ")
+			}
+		}
+	}
 }
 
 func (r *robot) executeCommand(command int64) {
@@ -64,16 +76,32 @@ func (r *robot) executeCommand(command int64) {
 		switch loopingMod(r.currentDirection, 4) {
 		case 0:
 			r.currentCoordinates.y++
+			if r.currentCoordinates.y > r.upperBoundY {
+				r.upperBoundY = r.currentCoordinates.y
+			}
 		case 1:
 			r.currentCoordinates.x++
+			if r.currentCoordinates.x > r.upperBoundX {
+				r.upperBoundX = r.currentCoordinates.x
+			}
 		case 2:
 			r.currentCoordinates.y--
+			if r.currentCoordinates.y < r.lowerBoundY {
+				r.lowerBoundY = r.currentCoordinates.y
+			}
 		case 3:
 			r.currentCoordinates.x--
+			if r.currentCoordinates.x < r.lowerBoundX {
+				r.lowerBoundX = r.currentCoordinates.x
+			}
 		default:
 			panic("invalid direction")
 		}
-		r.currentTile = r.coordinatesPainted[fmt.Sprintf("%v:%v", r.currentCoordinates.x, r.currentCoordinates.y)]
+		if r.coordinatesPainted[fmt.Sprintf("%v:%v", r.currentCoordinates.x, r.currentCoordinates.y)] == 0 {
+			r.currentTile = 1
+		} else {
+			r.currentTile = 0
+		}
 	case 0:
 		r.coordinatesPainted[fmt.Sprintf("%v:%v", r.currentCoordinates.x, r.currentCoordinates.y)] = command
 	}
