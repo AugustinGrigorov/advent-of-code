@@ -32,7 +32,6 @@ type arcade struct {
 }
 
 var mode = flag.String("mode", "bot", "Determines the mode the game should be played in")
-var speed = flag.String("speed", "fast", "Determines the bot gamespeed")
 
 func main() {
 	flag.Parse()
@@ -156,11 +155,11 @@ func executeIndex(index, relativeBase int64, instructions map[int64]int64, a *ar
 		instructions[paramIndexes[2]] = instructions[paramIndexes[0]] * instructions[paramIndexes[1]]
 		return executeIndex(index+4, relativeBase, instructions, a)
 	case 3:
-		a.renderCurrentState()
+		if *mode != "headless" {
+			a.renderCurrentState()
+		}
 		if *mode == "bot" {
-			if *speed == "slow" {
-				time.Sleep(250 * time.Millisecond)
-			}
+			time.Sleep(20 * time.Millisecond)
 		}
 		input := a.getDirection()
 		flags := getFlags(operator)
