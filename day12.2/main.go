@@ -26,6 +26,7 @@ func main() {
 	var steps int64
 	var alignmentFound int
 	var moonInitialStates []*moon
+	dimensions := []dimension{x, y, z}
 
 	input, err := ioutil.ReadFile("input.txt")
 	if err != nil {
@@ -75,36 +76,27 @@ func main() {
 			applyVelocity(m)
 		}
 
-		xAlignment := true
-		yAlignment := true
-		zAlignment := true
-		for i := 0; i < len(moons); i++ {
+		inAlignment := make(map[dimension]bool)
+		for _, d := range dimensions {
+			inAlignment[d] = true
+		}
+
+		for i, m := range moons {
 			if steps != 0 {
-				initialStateCoordinates := moonInitialStates[i].coordinates
-				moonCoordinates := moons[i].coordinates
-				if moonCoordinates[x] != initialStateCoordinates[x] {
-					xAlignment = false
-				}
-				if moonCoordinates[y] != initialStateCoordinates[y] {
-					yAlignment = false
-				}
-				if moonCoordinates[z] != initialStateCoordinates[z] {
-					zAlignment = false
+				initialState := moonInitialStates[i]
+				for _, d := range dimensions {
+					if m.coordinates[d] != initialState.coordinates[d] ||
+						m.velocities[d] != initialState.velocities[d] {
+						inAlignment[d] = false
+					}
 				}
 			}
 		}
-
-		if xAlignment && alignments[x] == 0 {
-			alignments[x] = steps + 1
-			alignmentFound++
-		}
-		if yAlignment && alignments[y] == 0 {
-			alignments[y] = steps + 1
-			alignmentFound++
-		}
-		if zAlignment && alignments[z] == 0 {
-			alignments[z] = steps + 1
-			alignmentFound++
+		for _, d := range dimensions {
+			if inAlignment[d] && alignments[d] == 0 {
+				alignments[d] = steps
+				alignmentFound++
+			}
 		}
 	}
 
