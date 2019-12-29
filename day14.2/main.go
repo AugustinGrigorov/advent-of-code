@@ -30,14 +30,30 @@ func main() {
 	}
 	inputString := string(input)
 	inputArray := strings.Split(strings.Trim(inputString, "\n"), "\n")
-	reg := make(registry, len(inputArray))
+	reg := newRegistry(inputArray)
 
-	for _, rawFormula := range inputArray {
+	oreNeededForOneFuel := reg.calculateRequiredOre(fuel, 1)
+	var remainingOre float64 = 1000000000000
+	var producedFuel float64
+
+	reg = newRegistry(inputArray)
+
+	for remainingOre > 1 {
+		estimate := remainingOre / oreNeededForOneFuel
+		producedFuel += estimate
+		remainingOre -= reg.calculateRequiredOre(fuel, estimate)
+	}
+
+	fmt.Println(int(producedFuel))
+}
+
+func newRegistry(data []string) registry {
+	reg := make(registry, len(data))
+
+	for _, rawFormula := range data {
 		reg.parseFormula(rawFormula)
 	}
-	requiredOre := reg.calculateRequiredOre(fuel, 1)
-
-	fmt.Println(int(requiredOre))
+	return reg
 }
 
 func (r registry) parseFormula(rawFormula string) {
