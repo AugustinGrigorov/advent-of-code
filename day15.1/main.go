@@ -28,16 +28,31 @@ const (
 	east  direction = 4
 )
 
-var clockwiseRotation = []direction{north, east, south, west}
-var visitedCoordinates = make(map[coordinates]bool)
+type item int
+
+const (
+	wall     item = 0
+	corridor item = 1
+	problem  item = 2
+	start    item = 3
+	path     item = 4
+)
+
+var clockwiseDirections = []direction{north, east, south, west}
+var visitedCoordinates = make(map[coordinates]item)
+
+var lowerX, upperX, lowerY, upperY int64
 
 type droid struct {
 	position       coordinates
-	directionIndex int
 	blocked        bool
-	stepsBack      []int
-	stepsBackIndex int
+	directionIndex int
+	distance       int
+	path           []coordinates
 }
+
+var smallestDistance int
+var shortestPath []coordinates
 
 func main() {
 	input, err := ioutil.ReadFile("input.txt")
@@ -46,62 +61,111 @@ func main() {
 	}
 	inputString := string(input)
 	inputArray := strings.Split(strings.Trim(inputString, "\n"), ",")
-	output := make(map[int64]int64, len(inputArray))
+	instructions := make(map[int64]int64, len(inputArray))
 	for index, opcode := range inputArray {
-		output[int64(index)], err = strconv.ParseInt(opcode, 10, 64)
+		instructions[int64(index)], err = strconv.ParseInt(opcode, 10, 64)
 		if err != nil {
 			panic(err)
 		}
 	}
+	visitedCoordinates[coordinates{0, 0}] = start
 
-	d := droid{}
+	for index := range clockwiseDirections {
+		d := droid{
+			directionIndex: index,
+		}
+		executeIndex(0, 0, copyInstructions(instructions), &d)
+	}
 
-	executeIndex(0, 0, output, &d)
+	for _, coord := range shortestPath {
+		visitedCoordinates[coord] = path
+	}
+
+	// This bit is just a visualisation for fun
+	for y := upperY; y > lowerY-1; y-- {
+		fmt.Println()
+		for x := lowerX; x < upperX+1; x++ {
+			switch visitedCoordinates[coordinates{x, y}] {
+			case wall:
+				fmt.Print(" ◻️ ")
+			case corridor:
+				fmt.Print("   ")
+			case path:
+				fmt.Print(" + ")
+			case problem:
+				fmt.Print(" X ")
+			default:
+				fmt.Print(" O ")
+			}
+		}
+	}
+	fmt.Println()
+
+	fmt.Println("Shortest distance:", smallestDistance)
 }
 
-func (d *droid) output(status int64) {
-	newPos := d.getMoveCoordinates(d.getDirection())
-	visitedCoordinates[newPos] = true
+func copyInstructions(instructions map[int64]int64) map[int64]int64 {
+	copy := make(map[int64]int64, len(instructions))
+	for k, v := range instructions {
+		copy[k] = v
+	}
+	return copy
+}
 
-	switch status {
-	case 0:
-		d.directionIndex++
-	case 1:
-		if !d.blocked {
-			if len(d.stepsBack) == d.stepsBackIndex {
-				d.stepsBack = append(d.stepsBack, d.directionIndex+2)
-				d.stepsBackIndex++
-			} else {
-				d.stepsBack[d.stepsBackIndex] = d.directionIndex + 2
-				d.stepsBackIndex++
+func (d *droid) output(index int64, relativeBase int64, instructions map[int64]int64, status int64) {
+	currentCoordinates := d.getMoveCoordinates(getDirection(d.directionIndex))
+	if _, ok := visitedCoordinates[currentCoordinates]; ok {
+		d.blocked = true
+	}
+	visitedCoordinates[currentCoordinates] = item(status)
+
+	if currentCoordinates.x > upperX {
+		upperX = currentCoordinates.x
+	}
+	if currentCoordinates.y > upperY {
+		upperY = currentCoordinates.y
+	}
+	if currentCoordinates.x < lowerX {
+		lowerX = currentCoordinates.x
+	}
+	if currentCoordinates.y < lowerY {
+		lowerY = currentCoordinates.y
+	}
+
+	if status == 1 {
+		d.path = append(d.path, currentCoordinates)
+	}
+
+	if status == 1 || status == 2 {
+		d.position = currentCoordinates
+		d.distance++
+		for i := 1; i < 4; i += 2 {
+			newDirectionIndex := d.directionIndex + i
+			newCoordinates := d.getMoveCoordinates(getDirection(newDirectionIndex))
+			if _, ok := visitedCoordinates[newCoordinates]; !ok {
+				np := make([]coordinates, len(d.path))
+				copy(np, d.path)
+				nd := droid{
+					position:       d.position,
+					directionIndex: newDirectionIndex,
+					distance:       d.distance,
+					path:           np,
+				}
+				executeIndex(index, relativeBase, copyInstructions(instructions), &nd)
 			}
-			d.directionIndex = 0
-		} else {
-			d.directionIndex = d.stepsBack[d.stepsBackIndex]
-			d.stepsBackIndex--
 		}
-		d.position = newPos
-		fmt.Printf("%v, %v\n", d.position.x, d.position.y)
-	case 2:
-		d.position = newPos
-		fmt.Println("Found problem at", d.position)
+	}
+
+	if status == 2 {
+		if smallestDistance == 0 || d.distance < smallestDistance {
+			smallestDistance = d.distance
+			shortestPath = d.path
+		}
 	}
 }
 
 func (d *droid) input() direction {
-	var moves int
-
-	for visitedCoordinates[d.getMoveCoordinates(d.getDirection())] {
-		d.directionIndex++
-		moves++
-		if moves == 4 {
-			d.blocked = true
-			break
-		}
-	}
-	d.blocked = false
-
-	return d.getDirection()
+	return getDirection(d.directionIndex)
 }
 
 func (d *droid) getMoveCoordinates(direct direction) coordinates {
@@ -119,8 +183,8 @@ func (d *droid) getMoveCoordinates(direct direction) coordinates {
 	return pos
 }
 
-func (d *droid) getDirection() direction {
-	return clockwiseRotation[d.directionIndex%4]
+func getDirection(index int) direction {
+	return clockwiseDirections[index%4]
 }
 
 func executeIndex(index, relativeBase int64, instructions map[int64]int64, d *droid) map[int64]int64 {
@@ -137,15 +201,17 @@ func executeIndex(index, relativeBase int64, instructions map[int64]int64, d *dr
 		instructions[paramIndexes[2]] = instructions[paramIndexes[0]] * instructions[paramIndexes[1]]
 		return executeIndex(index+4, relativeBase, instructions, d)
 	case 3:
-		input := d.input()
-		flags := getFlags(operator)
-		paramIndexes := getParameterIndexes(index, relativeBase, instructions, flags, 1)
-		instructions[paramIndexes[0]] = int64(input)
-		return executeIndex(index+2, relativeBase, instructions, d)
+		if !d.blocked {
+			input := d.input()
+			flags := getFlags(operator)
+			paramIndexes := getParameterIndexes(index, relativeBase, instructions, flags, 1)
+			instructions[paramIndexes[0]] = int64(input)
+			return executeIndex(index+2, relativeBase, instructions, d)
+		}
 	case 4:
 		flags := getFlags(operator)
 		paramIndexes := getParameterIndexes(index, relativeBase, instructions, flags, 1)
-		d.output(instructions[paramIndexes[0]])
+		d.output(index+2, relativeBase, instructions, instructions[paramIndexes[0]])
 		return executeIndex(index+2, relativeBase, instructions, d)
 	case 5:
 		flags := getFlags(operator)
