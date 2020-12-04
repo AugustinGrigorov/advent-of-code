@@ -1,4 +1,4 @@
-package Day1
+package day1
 
 class Solution {
     fun solve (desiredAddends: Int, input: String) : Int {
