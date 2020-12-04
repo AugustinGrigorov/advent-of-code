@@ -7,17 +7,17 @@ enum class ValidationMethod {
 class Solution {
     fun solve(validationMethod: ValidationMethod, input: String): Int {
         val passwordCandidates = processInput(input)
-        return passwordCandidates.count{
+        return passwordCandidates.count {
             it.validate(validationMethod)
         }
     }
 
     private fun processInput(input: String): List<PasswordCandidate> {
         return input.split("\n").map {
-            var passwordAndPattern = it.split(": ")
-            var password = passwordAndPattern[1]
-            var pattern = passwordAndPattern[0]
-            var patternParameters = pattern.split(Regex("[ -]"))
+            val passwordAndPattern = it.split(": ")
+            val password = passwordAndPattern[1]
+            val pattern = passwordAndPattern[0]
+            val patternParameters = pattern.split(Regex("[ -]"))
             PasswordCandidate(
                 password,
                 Rule(patternParameters[0].toInt(), patternParameters[1].toInt(), patternParameters[2].single())
@@ -26,10 +26,10 @@ class Solution {
     }
 
     class PasswordCandidate(private val password: String, private val rule: Rule) {
-        fun validate (validationMethod: ValidationMethod) : Boolean {
-            return when(validationMethod) {
+        fun validate(validationMethod: ValidationMethod): Boolean {
+            return when (validationMethod) {
                 ValidationMethod.OLD -> {
-                    val occurrences = password.count{
+                    val occurrences = password.count {
                         it == rule.char
                     }
                     occurrences >= rule.firstParam && occurrences <= rule.secondParam
@@ -44,5 +44,6 @@ class Solution {
             }
         }
     }
+
     data class Rule(val firstParam: Int, val secondParam: Int, val char: Char)
 }

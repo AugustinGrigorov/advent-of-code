@@ -1,7 +1,7 @@
 package day1
 
 class Solution {
-    fun solve (desiredAddends: Int, input: String) : Int {
+    fun solve(desiredAddends: Int, input: String): Int {
         if (desiredAddends < 2) return 0
         val targetSum = 2020
         val numbers = input.split("\n").map { it.toInt() }
@@ -23,10 +23,10 @@ class Solution {
             }
         }
 
-        numbers.forEach{ num ->
-            var result = num;
+        numbers.forEach { num ->
+            var result = num
             sums[targetSum - num]?.let { it ->
-                it.forEach{
+                it.forEach {
                     result *= it
                 }
                 return result
