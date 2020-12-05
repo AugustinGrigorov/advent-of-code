@@ -5,7 +5,7 @@ class Solution(input: String) {
 
     init {
         idList = input.split("\n").map {
-            it.replace('F', '0').replace('B', '1').replace('L', '0').replace('R', '1').toInt(2)
+            it.replace(Regex("[FL]"), "0").replace(Regex("[BR]"), "1").toInt(2)
         }
     }
 
