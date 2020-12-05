@@ -121,4 +121,17 @@ class SolutionsTest {
                 "iyr:2010 hgt:158cm hcl:#b6652a ecl:blu byr:1944 eyr:2021 pid:093154719"
         assert(dayFourSolution.solve(true, validPassports) == 4)
     }
+
+    @Test
+    fun day5_getsCorrectPassportId() {
+        val testCases = hashMapOf<String, Int>(
+            "BFFFBBFRRR" to 567,
+            "FFFBBBFRRR" to 119,
+            "BBFFBBFRLL" to 820
+        )
+        testCases.forEach {
+            val dayFiveSolution = day5.Solution(it.key)
+            assert(dayFiveSolution.biggest() == it.value)
+        }
+    }
 }

@@ -33,4 +33,11 @@ fun main() {
     println("---Day4---")
     println(dayFourSolution.solve(false, dayFourInput))
     println(dayFourSolution.solve(true, dayFourInput))
+
+    // Day 5
+    val dayFiveInput = File("src/inputs/day5.txt").readText().trim()
+    val dayFiveSolution = day5.Solution(dayFiveInput)
+    println("---Day5---")
+    println(dayFiveSolution.biggest())
+    println(dayFiveSolution.missing())
 }
