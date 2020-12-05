@@ -5,9 +5,7 @@ class Solution(input: String) {
 
     init {
         idList = input.split("\n").map {
-            val row = it.substring(0, 7).replace('F', '0').replace('B', '1').toInt(2)
-            val col = it.substring(7).replace('L', '0').replace('R', '1').toInt(2)
-            row * 8 + col
+            it.replace('F', '0').replace('B', '1').replace('L', '0').replace('R', '1').toInt(2)
         }
     }
 
