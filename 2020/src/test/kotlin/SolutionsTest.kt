@@ -134,4 +134,31 @@ class SolutionsTest {
             assert(dayFiveSolution.biggest() == it.value)
         }
     }
+
+    val daySixInput = "abc\n" +
+            "\n" +
+            "a\n" +
+            "b\n" +
+            "c\n" +
+            "\n" +
+            "ab\n" +
+            "ac\n" +
+            "\n" +
+            "a\n" +
+            "a\n" +
+            "a\n" +
+            "a\n" +
+            "\n" +
+            "b"
+    private val daySixSolution = day6.Solution(daySixInput)
+
+    @Test
+    fun day6_countsAnyAnswersInAGroupCorrectly() {
+        assert(daySixSolution.anyone() == 11)
+    }
+
+    @Test
+    fun day6_countsEveryAnswersInAGroupCorrectly() {
+        assert(daySixSolution.everyone() == 6)
+    }
 }

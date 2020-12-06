@@ -40,4 +40,11 @@ fun main() {
     println("---Day5---")
     println(dayFiveSolution.biggest())
     println(dayFiveSolution.missing())
+
+    // Day 6
+    val daySixInput = File("src/inputs/day6.txt").readText().trim()
+    val daySixSolution = day6.Solution(daySixInput)
+    println("---Day6---")
+    println(daySixSolution.anyone())
+    println(daySixSolution.everyone())
 }
