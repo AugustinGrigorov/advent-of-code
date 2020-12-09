@@ -193,15 +193,15 @@ class SolutionsTest {
     }
 
     private val dayEightSolution = day8.Solution(
-"nop +0\n" +
-        "acc +1\n" +
-        "jmp +4\n" +
-        "acc +3\n" +
-        "jmp -3\n" +
-        "acc -99\n" +
-        "acc +1\n" +
-        "jmp -4\n" +
-        "acc +6"
+        "nop +0\n" +
+                "acc +1\n" +
+                "jmp +4\n" +
+                "acc +3\n" +
+                "jmp -3\n" +
+                "acc -99\n" +
+                "acc +1\n" +
+                "jmp -4\n" +
+                "acc +6"
     )
 
     @Test
@@ -212,5 +212,38 @@ class SolutionsTest {
     @Test
     fun day8_fixesInfiniteLoopCorrectly() {
         assert(dayEightSolution.run(true) == 8)
+    }
+
+    private val dayNineSolution = day9.Solution(
+        "35\n" +
+                "20\n" +
+                "15\n" +
+                "25\n" +
+                "47\n" +
+                "40\n" +
+                "62\n" +
+                "55\n" +
+                "65\n" +
+                "95\n" +
+                "102\n" +
+                "117\n" +
+                "150\n" +
+                "182\n" +
+                "127\n" +
+                "219\n" +
+                "299\n" +
+                "277\n" +
+                "309\n" +
+                "576"
+    )
+
+    @Test
+    fun day9_findsOutlierCorrectly() {
+        assert(dayNineSolution.findOutlier(5) == 127L)
+    }
+
+    @Test
+    fun day9_findsWeaknessCorrectly() {
+        assert(dayNineSolution.findEncryptionWeakness(5) == 62L)
     }
 }
