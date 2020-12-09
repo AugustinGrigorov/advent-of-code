@@ -54,4 +54,11 @@ fun main() {
     println("---Day7---")
     println(daySevenSolution.parentsOfShinyGoldBag)
     println(daySevenSolution.childrenOfShinyGoldBag)
+
+    // Day 8
+    val dayEightInput = File("src/inputs/day8.txt").readText().trim()
+    val dayEightSolution = day8.Solution(dayEightInput)
+    println("---Day8---")
+    println(dayEightSolution.run(false))
+    println(dayEightSolution.run(true))
 }

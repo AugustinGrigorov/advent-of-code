@@ -106,7 +106,6 @@ class SolutionsTest {
 
     @Test
     fun day4_validatesValidPassports() {
-        println("Valid passports test")
         val validPassports = "pid:087499704 hgt:74in ecl:grn iyr:2012 eyr:2030 byr:1980\n" +
                 "hcl:#623a2f\n" +
                 "\n" +
@@ -190,7 +189,28 @@ class SolutionsTest {
                     "dark blue bags contain 2 dark violet bags.\n" +
                     "dark violet bags contain no other bags."
         )
-        println(daySevenSolution.childrenOfShinyGoldBag)
         assert(daySevenSolution.childrenOfShinyGoldBag == 126)
+    }
+
+    private val dayEightSolution = day8.Solution(
+"nop +0\n" +
+        "acc +1\n" +
+        "jmp +4\n" +
+        "acc +3\n" +
+        "jmp -3\n" +
+        "acc -99\n" +
+        "acc +1\n" +
+        "jmp -4\n" +
+        "acc +6"
+    )
+
+    @Test
+    fun day8_detectsInfiniteLoopCorrectly() {
+        assert(dayEightSolution.run(false) == 5)
+    }
+
+    @Test
+    fun day8_fixesInfiniteLoopCorrectly() {
+        assert(dayEightSolution.run(true) == 8)
     }
 }
