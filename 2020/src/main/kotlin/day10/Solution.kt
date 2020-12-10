@@ -29,7 +29,7 @@ class Solution(input: String) {
         memoTable[index]?.let { return it }
         var cursor = index + 1
         var acc = 0L
-        while (cursor < sortedVoltages.size && sortedVoltages[cursor] - 3 <= sortedVoltages[index]) {
+        while (cursor < sortedVoltages.size && sortedVoltages[cursor] <= sortedVoltages[index] + 3) {
             acc += findAllPossibleCombinationsAtIndex(cursor)
             cursor++
         }
