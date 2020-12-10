@@ -68,4 +68,11 @@ fun main() {
     println("---Day9---")
     println(dayNineSolution.findOutlier(25))
     println(dayNineSolution.findEncryptionWeakness(25))
+
+    // Day 10
+    val dayTenInput = File("src/inputs/day10.txt").readText().trim()
+    val dayTenSolution = day10.Solution(dayTenInput)
+    println("---Day10---")
+    println(dayTenSolution.findVoltageDifference())
+    println(dayTenSolution.findAdapterCombinations())
 }
