@@ -82,4 +82,11 @@ fun main() {
     println("---Day11---")
     println(dayElevenSolution.getOccupiedAdjacentSeats())
     println(dayElevenSolution.getOccupiedSeatsInLineOfSight())
+
+    // Day 12
+    val dayTwelveInput = File("src/inputs/day12.txt").readText().trim()
+    val dayTwelveSolution = day12.Solution(dayTwelveInput)
+    println("---Day12---")
+    println(dayTwelveSolution.getManhattanDistanceWithoutWaypoint())
+    println(dayTwelveSolution.getManhattanDistanceWithWaypoint())
 }

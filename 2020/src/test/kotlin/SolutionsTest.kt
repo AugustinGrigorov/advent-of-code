@@ -333,4 +333,22 @@ class SolutionsTest {
     fun day11_findsOccupiedSeatsCorrectlyForLineOfSight() {
         assert(dayElevenSolution.getOccupiedSeatsInLineOfSight() == 26)
     }
+
+    private val dayTwelveSolution = day12.Solution(
+        "F10\n" +
+                "N3\n" +
+                "F7\n" +
+                "R90\n" +
+                "F11"
+    )
+
+    @Test
+    fun day12_findsDistanceWithoutWaypointCorrectly() {
+        assert(dayTwelveSolution.getManhattanDistanceWithoutWaypoint() == 25L)
+    }
+
+    @Test
+    fun day12_findsDistanceWithWaypointCorrectly() {
+        assert(dayTwelveSolution.getManhattanDistanceWithWaypoint() == 286L)
+    }
 }
