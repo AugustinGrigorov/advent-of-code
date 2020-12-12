@@ -310,4 +310,27 @@ class SolutionsTest {
             day10.Solution(dayTenTestCaseTwo).findAdapterCombinations() == 19208L
         )
     }
+
+    private val dayElevenSolution = day11.Solution(
+        "L.LL.LL.LL\n" +
+                "LLLLLLL.LL\n" +
+                "L.L.L..L..\n" +
+                "LLLL.LL.LL\n" +
+                "L.LL.LL.LL\n" +
+                "L.LLLLL.LL\n" +
+                "..L.L.....\n" +
+                "LLLLLLLLLL\n" +
+                "L.LLLLLL.L\n" +
+                "L.LLLLL.LL"
+    )
+
+    @Test
+    fun day11_findsOccupiedSeatsCorrectlyForAdjacent() {
+        assert(dayElevenSolution.getOccupiedAdjacentSeats() == 37)
+    }
+
+    @Test
+    fun day11_findsOccupiedSeatsCorrectlyForLineOfSight() {
+        assert(dayElevenSolution.getOccupiedSeatsInLineOfSight() == 26)
+    }
 }

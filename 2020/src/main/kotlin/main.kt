@@ -75,4 +75,11 @@ fun main() {
     println("---Day10---")
     println(dayTenSolution.findVoltageDifference())
     println(dayTenSolution.findAdapterCombinations())
+
+    // Day 11
+    val dayElevenInput = File("src/inputs/day11.txt").readText().trim()
+    val dayElevenSolution = day11.Solution(dayElevenInput)
+    println("---Day11---")
+    println(dayElevenSolution.getOccupiedAdjacentSeats())
+    println(dayElevenSolution.getOccupiedSeatsInLineOfSight())
 }

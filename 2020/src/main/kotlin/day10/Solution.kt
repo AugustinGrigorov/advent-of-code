@@ -19,7 +19,6 @@ class Solution(input: String) {
         }
         return oneJoltDifferences * threeJoltDifferences
     }
-
     fun findAdapterCombinations(): Long {
         return findAllPossibleCombinationsAtIndex(0)
     }
