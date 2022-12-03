@@ -1,8 +1,9 @@
 //
 // Created by Augustin Grigorov on 02/12/2022.
 //
-#include "./day1/SolutionDay1.h"
-#include "./day2/SolutionDay2.h"
+#include "day1/SolutionDay1.h"
+#include "day2/SolutionDay2.h"
+#include "day3/SolutionDay3.h"
 #include <iostream>
 
 int main() {
@@ -12,5 +13,8 @@ int main() {
     SolutionDay2 day2;
     std::cout << "Day 2 part 1: " << day2.solve1() << std::endl;
     std::cout << "Day 2 part 2: " << day2.solve2() << std::endl;
+    SolutionDay3 day3;
+    std::cout << "Day 3 part 1: " << day3.solve1() << std::endl;
+    std::cout << "Day 3 part 2: " << day3.solve2() << std::endl;
     return 0;
 }
