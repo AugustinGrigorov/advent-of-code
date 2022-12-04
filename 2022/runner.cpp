@@ -4,6 +4,7 @@
 #include "day1/SolutionDay1.h"
 #include "day2/SolutionDay2.h"
 #include "day3/SolutionDay3.h"
+#include "day4/SolutionDay4.h"
 #include <iostream>
 
 int main() {
@@ -16,5 +17,8 @@ int main() {
     SolutionDay3 day3;
     std::cout << "Day 3 part 1: " << day3.solve1() << std::endl;
     std::cout << "Day 3 part 2: " << day3.solve2() << std::endl;
+    SolutionDay4 day4;
+    std::cout << "Day 4 part 1: " << day4.solve1() << std::endl;
+    std::cout << "Day 4 part 2: " << day4.solve2() << std::endl;
     return 0;
 }
