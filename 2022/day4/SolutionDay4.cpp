@@ -3,21 +3,13 @@
 //
 
 #include "SolutionDay4.h"
-#include <fstream>
 
-SolutionDay4::SolutionDay4() {
-    std::string line;
-    std::ifstream input;
-    input.open("day4/input");
-    if (!input.is_open()) {
-        throw std::runtime_error("Unable to open file");
-    }
-
-    while (getline(input, line)) {
+SolutionDay4::SolutionDay4(std::ifstream input) {
+    for (std::string line; getline(input, line);) {
         if (!line.empty()) {
             long shifts[4] = {};
-            char * workingInput = line.data();
-            for (long & number : shifts) {
+            char *workingInput = line.data();
+            for (long &number: shifts) {
                 number = strtol(workingInput, &workingInput, 10);
                 workingInput++;
             }
@@ -26,7 +18,7 @@ SolutionDay4::SolutionDay4() {
                 partialOverlapOccurrences++;
                 continue;
             }
-            if (shifts[0] >= shifts [2] && shifts[0] <= shifts [3] || shifts[1] >= shifts[2] && shifts[1] <= shifts[3]) {
+            if (shifts[0] >= shifts[2] && shifts[0] <= shifts[3] || shifts[1] >= shifts[2] && shifts[1] <= shifts[3]) {
                 partialOverlapOccurrences++;
             }
         }

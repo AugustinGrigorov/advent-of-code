@@ -3,12 +3,8 @@
 //
 
 #include "SolutionDay3.h"
-#include <fstream>
-#include <iostream>
-#include <algorithm>
-#include <iterator>
 #include <array>
-#include <set>
+#include <unordered_set>
 
 int letterPriority(char c) {
     if (islower(c)) {
@@ -18,25 +14,19 @@ int letterPriority(char c) {
     }
 }
 
-SolutionDay3::SolutionDay3() {
-    std::string line;
-    std::ifstream input;
-    input.open("day3/input");
-    if (!input.is_open()) {
-        throw std::runtime_error("Unable to open file");
-    }
+SolutionDay3::SolutionDay3(std::ifstream input) {
     int lineNumber = 0;
-    std::array<int,52> badgeCandidateLetters = {};
-    while (getline(input, line)) {
+    std::array<int, 52> badgeCandidateLetters = {};
+    for (std::string line; getline(input, line);) {
         if (!line.empty()) {
             // Part 1
             bool usedLetters[52]{};
-            std::string compartment1 = line.substr(0, line.size()/2);
-            std::string compartment2 = line.substr(line.size()/2, line.size()/2);
-            for (char usedLetter : compartment1) {
+            std::string compartment1 = line.substr(0, line.size() / 2);
+            std::string compartment2 = line.substr(line.size() / 2, line.size() / 2);
+            for (char usedLetter: compartment1) {
                 usedLetters[letterPriority(usedLetter) - 1] = true;
             }
-            for (char repeatLetterCandidate : compartment2) {
+            for (char repeatLetterCandidate: compartment2) {
                 if (usedLetters[letterPriority(repeatLetterCandidate) - 1]) {
                     improperlyPlacedItems.push_back(repeatLetterCandidate);
                     break;
@@ -46,8 +36,8 @@ SolutionDay3::SolutionDay3() {
             if (lineNumber % 3 == 0) {
                 badgeCandidateLetters.fill(0);
             }
-            std::set<char> uniqueChars(begin(line), end(line));
-            for (char c : uniqueChars) {
+            std::unordered_set<char> uniqueChars(begin(line), end(line));
+            for (char c: uniqueChars) {
                 badgeCandidateLetters[letterPriority(c) - 1] += 1;
             }
             if (lineNumber % 3 == 2) {
@@ -64,7 +54,7 @@ SolutionDay3::SolutionDay3() {
 
 int SolutionDay3::solve1() {
     int sum = 0;
-    for (char improperlyPlacedItem : improperlyPlacedItems) {
+    for (char improperlyPlacedItem: improperlyPlacedItems) {
         sum += letterPriority(improperlyPlacedItem);
     }
     return sum;

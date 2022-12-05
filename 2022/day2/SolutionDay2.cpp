@@ -3,7 +3,6 @@
 //
 
 #include "SolutionDay2.h"
-#include <fstream>
 #include <map>
 
 std::map<char, int> inputToVal = {
@@ -95,14 +94,8 @@ int scoreRoundVariant2(int theirShape, int result) {
     }
 };
 
-SolutionDay2::SolutionDay2() {
-    std::string line;
-    std::ifstream input;
-    input.open("day2/input");
-    if (!input.is_open()) {
-        throw std::runtime_error("Unable to open file");
-    }
-    while (getline(input, line)) {
+SolutionDay2::SolutionDay2(std::ifstream input) {
+    for (std::string line; getline(input, line);) {
         if (!line.empty()) {
             int val1 = inputToVal[line[0]];
             int val2 = inputToVal[line[2]];

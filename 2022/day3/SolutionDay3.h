@@ -4,13 +4,18 @@
 
 #ifndef AOC2022_SOLUTIONDAY3_H
 #define AOC2022_SOLUTIONDAY3_H
+
 #include <vector>
+#include <fstream>
 
 class SolutionDay3 {
 public:
-    SolutionDay3();
+    explicit SolutionDay3(std::ifstream input);
+
     int solve1();
+
     int solve2();
+
 private:
     std::vector<char> improperlyPlacedItems;
     int badgeSum = 0;
