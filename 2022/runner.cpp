@@ -1,12 +1,13 @@
 //
 // Created by Augustin Grigorov on 02/12/2022.
 //
+#include "util/ReadFileInput.h"
 #include "day1/SolutionDay1.h"
 #include "day2/SolutionDay2.h"
 #include "day3/SolutionDay3.h"
 #include "day4/SolutionDay4.h"
 #include "day5/SolutionDay5.h"
-#include "util/ReadFileInput.h"
+#include "day6/SolutionDay6.h"
 #include <iostream>
 
 
@@ -27,5 +28,7 @@ int main() {
     printResults(day4, 4);
     SolutionDay5 day5(ReadFileInput::parseFile("day5/input"));
     printResults(day5, 5);
+    SolutionDay6 day6(ReadFileInput::parseFile("day6/input"));
+    printResults(day6, 6);
     return 0;
 }

@@ -65,7 +65,7 @@ void SolutionDay5::simulateMovePart2(long amount, long from, long to) {
     }
 }
 
-std::string getTopOfEachStack(std::vector<std::deque<char>> allStacks) {
+std::string getTopOfEachStack(std::vector<std::deque<char>>& allStacks) {
     std::string topOfEachStack;
     for (auto &stack: allStacks) {
         topOfEachStack += stack.back();

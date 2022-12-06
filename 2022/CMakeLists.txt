@@ -16,4 +16,6 @@ add_executable(AOC2022
         day4/SolutionDay4.cpp
         day5/SolutionDay5.h
         day5/SolutionDay5.cpp
+        day6/SolutionDay6.h
+        day6/SolutionDay6.cpp
         runner.cpp)
