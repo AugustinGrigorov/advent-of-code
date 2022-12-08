@@ -8,14 +8,16 @@
 #include "day4/SolutionDay4.h"
 #include "day5/SolutionDay5.h"
 #include "day6/SolutionDay6.h"
+#include "day7/SolutionDay7.h"
+#include "day8/SolutionDay8.h"
 #include <iostream>
 
 
 template<typename Solution>
-void printResults(Solution solution, int day) {
+void printResults(Solution &solution, int day) {
     std::cout << "Day " << day << " part 1: " << solution.solve1() << std::endl;
     std::cout << "Day " << day << " part 2: " << solution.solve2() << std::endl;
- }
+}
 
 int main() {
     SolutionDay1 day1(ReadFileInput::parseFile("day1/input"));
@@ -30,5 +32,9 @@ int main() {
     printResults(day5, 5);
     SolutionDay6 day6(ReadFileInput::parseFile("day6/input"));
     printResults(day6, 6);
+    SolutionDay7 day7(ReadFileInput::parseFile("day7/input"));
+    printResults(day7, 7);
+    SolutionDay8 day8(ReadFileInput::parseFile("day8/input"));
+    printResults(day8, 8);
     return 0;
 }
