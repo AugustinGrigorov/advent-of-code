@@ -10,6 +10,7 @@
 #include "day6/SolutionDay6.h"
 #include "day7/SolutionDay7.h"
 #include "day8/SolutionDay8.h"
+#include "day9/SolutionDay9.h"
 #include <iostream>
 
 
@@ -36,5 +37,7 @@ int main() {
     printResults(day7, 7);
     SolutionDay8 day8(ReadFileInput::parseFile("day8/input"));
     printResults(day8, 8);
+    SolutionDay9 day9(ReadFileInput::parseFile("day9/input"));
+    printResults(day9, 9);
     return 0;
 }
