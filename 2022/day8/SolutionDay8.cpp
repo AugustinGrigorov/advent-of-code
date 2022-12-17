@@ -29,43 +29,43 @@ SolutionDay8::SolutionDay8(std::ifstream input) {
 
     // Part 1
     std::vector<std::vector<bool>> visible = {};
-    for (int y = 0; y < treeHeightMap.size(); ++y) {
+    for (size_t y = 0; y < treeHeightMap.size(); ++y) {
         std::vector<bool> row = {};
         for (size_t x = 0; x < treeHeightMap[0].size(); ++x) {
             row.push_back(false);
         }
         visible.push_back(row);
     }
-    for (int x = 0; x < treeHeightMap[0].size(); ++x) {
+    for (size_t x = 0; x < treeHeightMap[0].size(); ++x) {
         int tallestTreeSoFar = -1;
         for (size_t y = treeHeightMap.size(); y-- > 0;) {
             evaluateTree(treeHeightMap, visible, x, y, tallestTreeSoFar, numberOfVisibleTrees);
         }
     }
-    for (int x = 0; x < treeHeightMap[0].size(); ++x) {
+    for (size_t x = 0; x < treeHeightMap[0].size(); ++x) {
         int tallestTreeSoFar = -1;
         for (size_t y = 0; y < treeHeightMap.size(); ++y) {
             evaluateTree(treeHeightMap, visible, x, y, tallestTreeSoFar, numberOfVisibleTrees);
         }
     }
-    for (int y = 0; y < treeHeightMap.size(); ++y) {
+    for (size_t y = 0; y < treeHeightMap.size(); ++y) {
         int tallestTreeSoFar = -1;
         for (size_t x = treeHeightMap.size(); x-- > 0;) {
             evaluateTree(treeHeightMap, visible, x, y, tallestTreeSoFar, numberOfVisibleTrees);
         }
     }
-    for (int y = 0; y < treeHeightMap.size(); ++y) {
+    for (size_t y = 0; y < treeHeightMap.size(); ++y) {
         int tallestTreeSoFar = -1;
-        for (int x = 0; x < treeHeightMap[0].size(); ++x) {
+        for (size_t x = 0; x < treeHeightMap[0].size(); ++x) {
             evaluateTree(treeHeightMap, visible, x, y, tallestTreeSoFar, numberOfVisibleTrees);
         }
     }
 
     // Part 2
-    for (int y = 0; y < treeHeightMap.size(); ++y) {
-        for (int x = 0; x < treeHeightMap[y].size(); ++x) {
+    for (size_t y = 0; y < treeHeightMap.size(); ++y) {
+        for (size_t x = 0; x < treeHeightMap[y].size(); ++x) {
             int roomRight = 0;
-            for (int xr = x + 1; xr < treeHeightMap.size(); ++xr) {
+            for (size_t xr = x + 1; xr < treeHeightMap.size(); ++xr) {
                 roomRight++;
                 if (treeHeightMap[y][xr] >= treeHeightMap[y][x]) {
                     break;
@@ -79,7 +79,7 @@ SolutionDay8::SolutionDay8(std::ifstream input) {
                 }
             }
             int roomDown = 0;
-            for (int yd = y + 1; yd < treeHeightMap.size(); ++yd) {
+            for (size_t yd = y + 1; yd < treeHeightMap.size(); ++yd) {
                 roomDown++;
                 if (treeHeightMap[yd][x] >= treeHeightMap[y][x]) {
                     break;

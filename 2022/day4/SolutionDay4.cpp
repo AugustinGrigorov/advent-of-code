@@ -13,12 +13,12 @@ SolutionDay4::SolutionDay4(std::ifstream input) {
                 number = strtol(workingInput, &workingInput, 10);
                 workingInput++;
             }
-            if (shifts[0] <= shifts[2] && shifts[1] >= shifts[3] || shifts[0] >= shifts[2] && shifts[1] <= shifts[3]) {
+            if ((shifts[0] <= shifts[2] && shifts[1] >= shifts[3]) || (shifts[0] >= shifts[2] && shifts[1] <= shifts[3])) {
                 totalOverlapOccurrences++;
                 partialOverlapOccurrences++;
                 continue;
             }
-            if (shifts[0] >= shifts[2] && shifts[0] <= shifts[3] || shifts[1] >= shifts[2] && shifts[1] <= shifts[3]) {
+            if ((shifts[0] >= shifts[2] && shifts[0] <= shifts[3]) || (shifts[1] >= shifts[2] && shifts[1] <= shifts[3])) {
                 partialOverlapOccurrences++;
             }
         }

@@ -101,7 +101,6 @@ namespace {
         uint64_t start = chamber.size() - longestFall;
         uint64_t threshold = chamber.size() / 2;
         uint64_t patternLength = 0;
-        assert(longestFall < threshold);
         uint64_t patternStartIndex = 0;
         for (uint64_t currentLineIndex = start; currentLineIndex > start - threshold; --currentLineIndex) {
             for (uint64_t evaluationLineIndex = currentLineIndex - 1; evaluationLineIndex > 0; --evaluationLineIndex) {
@@ -110,7 +109,7 @@ namespace {
                 if (currentLine == evaluationLine) {
                     bool allLinesMatch = true;
                     uint64_t potentialPatternLength = currentLineIndex - evaluationLineIndex;
-                    for (int i = 0; i < potentialPatternLength; ++i) {
+                    for (size_t i = 0; i < potentialPatternLength; ++i) {
                         if (chamber[currentLineIndex - i] != chamber[evaluationLineIndex - i]) {
                             allLinesMatch = false;
                             break;
@@ -163,7 +162,7 @@ SolutionDay17::SolutionDay17(std::ifstream input) {
             auto howManyLinesAgoCurrentPatternStart = (currentHighest - patternStartIndex) % patternLength;
             linePatternStarted = currentHighest - howManyLinesAgoCurrentPatternStart;
         }
-        while (chamber.size() < currentHighest + 7) {
+        while (static_cast<int64_t>(chamber.size()) < currentHighest + 7) {
             std::vector<bool> row = {};
             for (int x = 0; x < 7; ++x) {
                 row.push_back(false);
@@ -206,7 +205,7 @@ SolutionDay17::SolutionDay17(std::ifstream input) {
         }
         if (linePatternStarted != 0 && startCountingAtTurn == 0) {
             bool allTrue = true;
-            for (int i = 0; i < pl; ++i) {
+            for (size_t i = 0; i < pl; ++i) {
                 if (linePatternStarted+i > chamber.size() -1) {
                     allTrue = false;
                     break;
@@ -222,7 +221,7 @@ SolutionDay17::SolutionDay17(std::ifstream input) {
         }
         if (startCountingAtTurn != 0 && heightOffset == 0) {
             bool allTrue = true;
-            for (int i = 0; i < pl; ++i) {
+            for (size_t i = 0; i < pl; ++i) {
                 if (linePatternStarted+i + pl > chamber.size() -1) {
                     allTrue = false;
                     break;

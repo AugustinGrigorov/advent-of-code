@@ -41,7 +41,7 @@ SolutionDay3::SolutionDay3(std::ifstream input) {
                 badgeCandidateLetters[letterPriority(c) - 1] += 1;
             }
             if (lineNumber % 3 == 2) {
-                for (int i = 0; i < badgeCandidateLetters.size(); ++i) {
+                for (size_t i = 0; i < badgeCandidateLetters.size(); ++i) {
                     if (badgeCandidateLetters[i] == 3) {
                         badgeSum += i + 1;
                     }

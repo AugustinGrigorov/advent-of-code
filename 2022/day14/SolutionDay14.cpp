@@ -22,7 +22,7 @@ public:
 void drawRock(std::vector<std::pair<int, int>> &rockRepresentation,
               std::unordered_map<std::pair<int, int>, char, IntPairHash> &map) {
     auto currentPoint = rockRepresentation[0];
-    for (int i = 1; i < rockRepresentation.size(); ++i) {
+    for (size_t i = 1; i < rockRepresentation.size(); ++i) {
         auto diffX = currentPoint.first - rockRepresentation[i].first;
         auto diffY = currentPoint.second - rockRepresentation[i].second;
         assert(diffX == 0 || diffY == 0);

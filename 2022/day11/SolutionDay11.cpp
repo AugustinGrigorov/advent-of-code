@@ -108,7 +108,7 @@ SolutionDay11::SolutionDay11(std::ifstream input) {
         }
     }
     for (int i = 0; i < 10000; ++i) {
-        for (int j = 0; j < optimisedMonkeys.size(); ++j) {
+        for (size_t j = 0; j < optimisedMonkeys.size(); ++j) {
             auto &optimisedMonkey = optimisedMonkeys[j];
             while (!optimisedMonkey.items.empty()) {
                 optimisedMonkey.inspects++;

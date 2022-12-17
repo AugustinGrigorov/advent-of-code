@@ -65,7 +65,7 @@ SolutionDay9::SolutionDay9(std::ifstream input) {
         int amount = static_cast<int>(strtol(line.c_str() + 2, nullptr, 10));
         for (int i = 0; i < amount; ++i) {
             move(direction, longQueue[0]);
-            for (int j = 1; j < longQueue.size(); ++j) {
+            for (size_t j = 1; j < longQueue.size(); ++j) {
                 std::unordered_set<std::pair<int, int>, IntPairHash> *visited = {};
                 if (j == 1) {
                     visited = &partOneVisited;

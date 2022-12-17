@@ -32,13 +32,13 @@ std::vector<Node *> getAdjacentNodes(Node *currentNode, std::vector<std::vector<
     if (currentCoordinates.first > 0) {
         candidates.push_back(&heightMap[currentCoordinates.first - 1][currentCoordinates.second]);
     }
-    if (currentCoordinates.first < heightMap.size() - 1) {
+    if (currentCoordinates.first < static_cast<int>(heightMap.size()) - 1) {
         candidates.push_back(&heightMap[currentCoordinates.first + 1][currentCoordinates.second]);
     }
     if (currentCoordinates.second > 0) {
         candidates.push_back(&heightMap[currentCoordinates.first][currentCoordinates.second - 1]);
     }
-    if (currentCoordinates.second < heightMap[currentCoordinates.first].size() - 1) {
+    if (currentCoordinates.second < static_cast<int>(heightMap[currentCoordinates.first].size()) - 1) {
         candidates.push_back(&heightMap[currentCoordinates.first][currentCoordinates.second + 1]);
     }
     for (auto &candidate: candidates) {
@@ -80,10 +80,6 @@ int findShortestPathFrom(std::pair<int, int> start, std::pair<int, int> finish, 
     return heightMap[currentCoordinates.first][currentCoordinates.second].shortestPath;
 }
 
-std::vector<std::vector<Node>> generateMinDistanceMap(std::pair<int, int> goal, std::vector<std::vector<Node>> &heightMap) {
-  // make a map of min distances for each position
-}
-
 SolutionDay12::SolutionDay12(std::ifstream input) {
     std::pair<int, int> start = {};
     std::pair<int, int> finish = {};
@@ -91,7 +87,7 @@ SolutionDay12::SolutionDay12(std::ifstream input) {
     std::vector<std::vector<Node>> heightMap = {};
     for (std::string line; getline(input, line);) {
         std::vector<Node> row = {};
-        for (int i = 0; i < line.size(); ++i) {
+        for (size_t i = 0; i < line.size(); ++i) {
             auto value = line[i];
             auto coordinates = std::make_pair(lineNumber, i);
             if (value == 'S') {
@@ -108,8 +104,8 @@ SolutionDay12::SolutionDay12(std::ifstream input) {
         lineNumber++;
     }
     shortestPathFromStart = findShortestPathFrom(start, finish, heightMap);
-    for (int x = 0; x < heightMap.size(); ++x) {
-        for (int y = 0; y < heightMap[x].size(); ++y) {
+    for (size_t x = 0; x < heightMap.size(); ++x) {
+        for (size_t y = 0; y < heightMap[x].size(); ++y) {
             auto currentNode = heightMap[x][y];
             if (currentNode.height == 0) {
                 auto currentPath = findShortestPathFrom(std::make_pair(x,y), finish, heightMap);

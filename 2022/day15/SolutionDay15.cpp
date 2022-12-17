@@ -79,20 +79,20 @@ void addToMap(
 }
 
 SolutionDay15::SolutionDay15(std::ifstream input) {
-//    int desiredLine = 2000000;
-//    std::unordered_map<std::pair<int, int>, char, IntPairHash> caveMap = {};
+    int desiredLine = 2000000;
+    std::unordered_map<std::pair<int, int>, char, IntPairHash> caveMap = {};
     std::vector<std::pair<std::pair<int, int>, std::pair<int, int>>> sensorBeaconPairs = {};
     for (std::string line; getline(input, line);) {
-        auto sensorBeaconPair = std::move(parseLine(line));
+        auto sensorBeaconPair = parseLine(line);
         sensorBeaconPairs.push_back(sensorBeaconPair);
 //        addToMap(sensorBeaconPair, caveMap, lowerBoundX, upperBoundX, desiredLine);
     }
-//    for (int x = lowerBoundX - 1; x < upperBoundX + 1; ++x) {
-//        auto potentialPos = std::make_pair(x, desiredLine);
-//        if (caveMap[potentialPos] == '#' || caveMap[potentialPos] == 'S') {
-//            spotsWhereBeaconCannotBe++;
-//        }
-//    }
+    for (int x = lowerBoundX - 1; x < upperBoundX + 1; ++x) {
+        auto potentialPos = std::make_pair(x, desiredLine);
+        if (caveMap[potentialPos] == '#' || caveMap[potentialPos] == 'S') {
+            spotsWhereBeaconCannotBe++;
+        }
+    }
     // Part 2
 //    std::unordered_map<std::pair<int, int>, char, IntPairHash> borderMap = {};
     int initialDimension = 4000000;
@@ -107,12 +107,12 @@ SolutionDay15::SolutionDay15(std::ifstream input) {
         bottomBorder.push_back(initialDimension);
     }
     //sort array
-    for (auto sensorBeaconPair : sensorBeaconPairs) {
-        auto [sensor, beacon] = sensorBeaconPair;
-        auto manhattanDistance = calculateManhattanDistance(sensor, beacon);
-
-        // find edges, reduce the size of the border
-    }
+//    for (auto sensorBeaconPair : sensorBeaconPairs) {
+//        auto [sensor, beacon] = sensorBeaconPair;
+//        auto manhattanDistance = calculateManhattanDistance(sensor, beacon);
+//
+//        // find edges, reduce the size of the border
+//    }
 }
 
 int SolutionDay15::solve1() {

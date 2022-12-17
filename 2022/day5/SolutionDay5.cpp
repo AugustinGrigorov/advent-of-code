@@ -16,9 +16,9 @@ SolutionDay5::SolutionDay5(std::ifstream input) {
     for (std::string line; getline(input, line);) {
         if (!line.empty()) {
             if (parsingCrates) {
-                for (int i = 0; i < line.size(); ++i) {
+                for (size_t i = 0; i < line.size(); ++i) {
                     char c = line[i];
-                    int stackNumber = i / 4;
+                    size_t stackNumber = i / 4;
                     if (c >= 'A' && c <= 'Z') {
                         while (stacksForPart1.size() < stackNumber + 1) {
                             stacksForPart1.emplace_back();

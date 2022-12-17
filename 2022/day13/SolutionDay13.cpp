@@ -84,7 +84,7 @@ SolutionDay13::SolutionDay13(std::ifstream input) {
         signalPacketsPart2.push_back(first);
         signalPacketsPart2.push_back(second);
     }
-    for (int i = 0; i < signalPacketsPart1.size(); ++i) {
+    for (size_t i = 0; i < signalPacketsPart1.size(); ++i) {
         auto &[leftPacket, rightPacket] = signalPacketsPart1[i];
         if (!(rightPacket < leftPacket)) {
             packetsInTheRightOrder += i + 1;
