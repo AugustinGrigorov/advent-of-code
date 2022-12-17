@@ -4,8 +4,8 @@ project(AOC2022)
 set(CMAKE_CXX_STANDARD 23)
 
 add_executable(AOC2022
-        util/ReadFileInput.h
-        util/ReadFileInput.cpp
+        util/Util.h
+        util/Util.cpp
         day1/SolutionDay1.h
         day1/SolutionDay1.cpp
         day2/SolutionDay2.h
@@ -26,4 +26,18 @@ add_executable(AOC2022
         day9/SolutionDay9.cpp
         day10/SolutionDay10.h
         day10/SolutionDay10.cpp
+        day11/SolutionDay11.h
+        day11/SolutionDay11.cpp
+        day12/SolutionDay12.h
+        day12/SolutionDay12.cpp
+        day13/SolutionDay13.h
+        day13/SolutionDay13.cpp
+        day14/SolutionDay14.h
+        day14/SolutionDay14.cpp
+        day15/SolutionDay15.h
+        day15/SolutionDay15.cpp
+        day16/SolutionDay16.h
+        day16/SolutionDay16.cpp
+        day17/SolutionDay17.h
+        day17/SolutionDay17.cpp
         runner.cpp)

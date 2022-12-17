@@ -2,10 +2,11 @@
 // Created by Augustin Grigorov on 05/12/2022.
 //
 
-#include "ReadFileInput.h"
+#include "Util.h"
 #include <fstream>
+#include <sstream>
 
-std::ifstream ReadFileInput::parseFile(std::string path) {
+std::ifstream Util::parseFile(std::string path) {
     std::string line;
     std::ifstream input;
     input.open(path);
@@ -13,4 +14,11 @@ std::ifstream ReadFileInput::parseFile(std::string path) {
         throw std::runtime_error("Unable to open file");
     }
     return input;
+}
+
+void Util::discard(std::istringstream &is, int times) {
+    std::string discard;
+    for (int i = 0; i < times; ++i) {
+        is >> discard;
+    }
 }
