@@ -20,24 +20,24 @@ public:
     }
 };
 
-std::pair<std::pair<int, int>, std::pair<int, int>> parseLine(std::string &input) {
-    std::istringstream is{input};
-    std::string rawSensorX;
-    std::string rawSensorY;
-    std::string rawBeaconX;
-    std::string rawBeaconY;
-    Util::discard(is, 2);
-    is >> rawSensorX;
-    is >> rawSensorY;
-    Util::discard(is, 4);
-    is >> rawBeaconX;
-    is >> rawBeaconY;
-    int sensorX = atoi(rawSensorX.substr(2, rawSensorX.size() - 1).c_str());
-    int sensorY = atoi(rawSensorY.substr(2, rawSensorY.size() - 1).c_str());
-    int beaconX = atoi(rawBeaconX.substr(2, rawBeaconX.size() - 1).c_str());
-    int beaconY = atoi(rawBeaconY.substr(2, rawBeaconY.size()).c_str());
-    return std::make_pair(std::make_pair(sensorX, sensorY), std::make_pair(beaconX, beaconY));
-}
+//int * parseLine(std::string &input) {
+//    std::istringstream is{input};
+//    std::string rawSensorX;
+//    std::string rawSensorY;
+//    std::string rawBeaconX;
+//    std::string rawBeaconY;
+//    Util::discard(is, 2);
+//    is >> rawSensorX;
+//    is >> rawSensorY;
+//    Util::discard(is, 4);
+//    is >> rawBeaconX;
+//    is >> rawBeaconY;
+//    int sensorX = atoi(rawSensorX.substr(2, rawSensorX.size() - 1).c_str());
+//    int sensorY = atoi(rawSensorY.substr(2, rawSensorY.size() - 1).c_str());
+//    int beaconX = atoi(rawBeaconX.substr(2, rawBeaconX.size() - 1).c_str());
+//    int beaconY = atoi(rawBeaconY.substr(2, rawBeaconY.size()).c_str());
+//    return std::make_pair(std::make_pair(sensorX, sensorY), std::make_pair(beaconX, beaconY));
+//}
 
 int calculateManhattanDistance(std::pair<int, int> p1, std::pair<int, int> p2) {
     return abs(p1.first - p2.first) + abs(p1.second - p2.second);
@@ -83,8 +83,8 @@ SolutionDay15::SolutionDay15(std::ifstream input) {
     std::unordered_map<std::pair<int, int>, char, IntPairHash> caveMap = {};
     std::vector<std::pair<std::pair<int, int>, std::pair<int, int>>> sensorBeaconPairs = {};
     for (std::string line; getline(input, line);) {
-        auto sensorBeaconPair = parseLine(line);
-        sensorBeaconPairs.push_back(sensorBeaconPair);
+//        auto sensorBeaconPair = parseLine(line);
+//        sensorBeaconPairs.push_back(sensorBeaconPair);
 //        addToMap(sensorBeaconPair, caveMap, lowerBoundX, upperBoundX, desiredLine);
     }
     for (int x = lowerBoundX - 1; x < upperBoundX + 1; ++x) {
