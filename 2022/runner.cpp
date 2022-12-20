@@ -20,6 +20,7 @@
 #include "day16/SolutionDay16.h"
 #include "day17/SolutionDay17.h"
 #include "day18/SolutionDay18.h"
+#include "day20/SolutionDay20.h"
 #include <iostream>
 
 
@@ -64,7 +65,9 @@ int main() {
     printResults(day16, 16);
     SolutionDay17 day17(Util::parseFile("day17/input"));
     printResults(day17, 17);
-    SolutionDay18 day18(Util::parseFile("day18/input"));
-    printResults(day18, 18);
+//    SolutionDay18 day18(Util::parseFile("day18/input"));
+//    printResults(day18, 18);
+    SolutionDay20 day20(Util::parseFile("day20/input"));
+    printResults(day20, 20);
     return 0;
 }
