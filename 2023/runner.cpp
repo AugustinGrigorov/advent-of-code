@@ -1,5 +1,6 @@
 #include "util/ReadFileInput.h"
 #include "day1/SolutionDay1.h"
+#include "day2/SolutionDay2.h"
 #include <iostream>
 
 template <typename Solution>
@@ -13,5 +14,7 @@ int main()
 {
     SolutionDay1 day1(ReadFileInput::parseFile("day1/input"));
     printResults(day1, 1);
+    SolutionDay2 day2(ReadFileInput::parseFile("day2/input"));
+    printResults(day2, 2);
     return 0;
 }
