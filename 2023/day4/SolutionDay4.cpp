@@ -62,15 +62,12 @@ SolutionDay4::SolutionDay4(std::ifstream input)
     unevaluatedTickets.assign(ticketVariations.size(), 1);
     totalTickets.assign(ticketVariations.size(), 1);
 
-    while (std::accumulate(unevaluatedTickets.begin(), unevaluatedTickets.end(), 0) > 0) {
-        for (int i = 0; i < unevaluatedTickets.size(); ++i) {
-            int numberOfTicketsOfType = unevaluatedTickets[i];
-            int ticketReward = ticketMatchingNumbers[i];
-            for (int j = 1; j <= ticketReward; ++j) {
-                totalTickets[i + j] += numberOfTicketsOfType;
-                unevaluatedTickets[i + j] += numberOfTicketsOfType;
-            }
-            unevaluatedTickets[i] = 0;
+    for (int i = 0; i < unevaluatedTickets.size(); ++i) {
+        int numberOfTicketsOfType = unevaluatedTickets[i];
+        int ticketReward = ticketMatchingNumbers[i];
+        for (int j = 1; j <= ticketReward; ++j) {
+            totalTickets[i + j] += numberOfTicketsOfType;
+            unevaluatedTickets[i + j] += numberOfTicketsOfType;
         }
     }
 
