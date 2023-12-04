@@ -20,5 +20,7 @@ int main()
     printResults(day2, 2);
     SolutionDay3 day3(ReadFileInput::parseFile("day3/input"));
     printResults(day3, 3);
-   return 0;
+    SolutionDay4 day4(ReadFileInput::parseFile("day4/input"));
+    printResults(day4, 4);
+    return 0;
 }
