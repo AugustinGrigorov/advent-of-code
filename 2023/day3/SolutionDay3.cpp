@@ -73,7 +73,6 @@ std::vector<std::pair<std::pair<int, int>, char>> SolutionDay3::getNeighbouringS
         for (int i = x - 1; i <= x + 1; ++i) {
             if (j == y && i == x) continue;
             if (j > 0 && i > 0 && j < engineSchematic.size() && i < engineSchematic[j].size()) {
-                std::pair<int, char> {1, 'c'};
                 std::pair<std::pair<int, int>, char> entry = std::make_pair(std::make_pair(j,i), engineSchematic[j][i]);
                 neighbours.push_back(entry);
             }
