@@ -3,6 +3,8 @@
 #include "day2/SolutionDay2.h"
 #include "day3/SolutionDay3.h"
 #include "day4/SolutionDay4.h"
+#include "day5/SolutionDay5.h"
+#include "day6/SolutionDay6.h"
 #include <iostream>
 
 template <typename Solution>
@@ -22,5 +24,9 @@ int main()
     printResults(day3, 3);
     SolutionDay4 day4(ReadFileInput::parseFile("day4/input"));
     printResults(day4, 4);
+    SolutionDay5 day5(ReadFileInput::parseFile("day5/input"));
+    printResults(day5, 5);
+    SolutionDay6 day6(ReadFileInput::parseFile("day6/input"));
+    printResults(day6, 6);
     return 0;
 }
