@@ -14,7 +14,7 @@ public:
     long solve2() const;
 private:
     long minDistance = std::numeric_limits<long>::max();
-    long partTwoSum = 0;
+    long partTwoSum = std::numeric_limits<long>::max();;
 };
 
 #endif // AOC2023_SOLUTIONDAY5_H
