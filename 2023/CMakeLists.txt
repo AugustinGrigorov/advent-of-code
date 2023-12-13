@@ -7,6 +7,7 @@ set(CMAKE_COMPILE_WARNING_AS_ERROR ON)
 add_compile_definitions(_GLIBCXX_DEBUG)
 
 add_executable(AOC2023
+        runner.cpp
         util/ReadFileInput.h
         util/ReadFileInput.cpp
         day1/SolutionDay1.h
@@ -27,4 +28,7 @@ add_executable(AOC2023
         day8/SolutionDay8.cpp
         day9/SolutionDay9.h
         day9/SolutionDay9.cpp
-        runner.cpp)
+        day10/SolutionDay10.h
+        day10/SolutionDay10.cpp
+        day11/SolutionDay11.h
+        day11/SolutionDay11.cpp)

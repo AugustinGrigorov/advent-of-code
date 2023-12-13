@@ -8,6 +8,8 @@
 #include "day7/SolutionDay7.h"
 #include "day8/SolutionDay8.h"
 #include "day9/SolutionDay9.h"
+#include "day10/SolutionDay10.h"
+#include "day11/SolutionDay11.h"
 #include <iostream>
 
 template <typename Solution>
@@ -35,7 +37,11 @@ int main()
 //    printResults(day7, 7);
 //    SolutionDay8 day8(ReadFileInput::parseFile("day8/input"));
 //    printResults(day8, 8);
-    SolutionDay9 day9(ReadFileInput::parseFile("day9/input"));
-    printResults(day9, 9);
+//    SolutionDay9 day9(ReadFileInput::parseFile("day9/input"));
+//    printResults(day9, 9);
+//    SolutionDay10 day10(ReadFileInput::parseFile("day10/input"));
+//    printResults(day10, 10);
+    SolutionDay11 day11(ReadFileInput::parseFile("day11/input"));
+    printResults(day11, 11);
     return 0;
 }
