@@ -11,6 +11,8 @@
 #include "day10/SolutionDay10.h"
 #include "day11/SolutionDay11.h"
 #include "day12/SolutionDay12.h"
+#include "day17/SolutionDay17.h"
+#include "day18/SolutionDay18.h"
 #include <iostream>
 
 template <typename Solution>
@@ -42,9 +44,13 @@ int main()
 //    printResults(day9, 9);
 //    SolutionDay10 day10(ReadFileInput::parseFile("day10/input"));
 //    printResults(day10, 10);
-// SolutionDay11 day11(ReadFileInput::parseFile("day11/input"));
-// printResults(day11, 11);
-    SolutionDay12 day12(ReadFileInput::parseFile("day12/test_input"));
-    printResults(day12, 12);
+//    SolutionDay11 day11(ReadFileInput::parseFile("day11/input"));
+//    printResults(day11, 11);
+//    SolutionDay12 day12(ReadFileInput::parseFile("day12/test_input"));
+//    printResults(day12, 12);
+//    SolutionDay17 day17(ReadFileInput::parseFile("day17/test_input"));
+//    printResults(day17, 17);
+    SolutionDay18 day18(ReadFileInput::parseFile("day18/input"));
+    printResults(day18, 18);
     return 0;
 }

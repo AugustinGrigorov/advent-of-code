@@ -11,10 +11,16 @@ bool isValidRepresentation (std::string &representation, std::vector<int> &valid
         if (c == '#') {
             streak++;
         } else {
-            damagedSpringCounts.push_back(streak);
+            if (streak != 0) {
+                damagedSpringCounts.push_back(streak);
+            }
             streak = 0;
         }
     }
+    if (streak != 0) {
+        damagedSpringCounts.push_back(streak);
+    }
+
     return damagedSpringCounts == validator;
 }
 
@@ -52,6 +58,7 @@ SolutionDay12::SolutionDay12(std::ifstream input)
             int springGroup = 0;
 
             is >> representation;
+            representation += '?';
             while (is >> springGroup)
             {
                 validator.push_back(springGroup);
@@ -65,6 +72,7 @@ SolutionDay12::SolutionDay12(std::ifstream input)
         for (auto representation : allPossibleCombinations) {
             if (isValidRepresentation(representation, record.second)) partOneSum += 1;
         }
+        std::cout << "Current sum: " << partOneSum << "\n";
     }
 }
 

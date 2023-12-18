@@ -16,4 +16,4 @@ private:
     int partTwoSum = 0;
 };
 
-#endif // AOC2023_SOLUTIONDAY1_H
+#endif // AOC2023_SOLUTIONDAY12_H

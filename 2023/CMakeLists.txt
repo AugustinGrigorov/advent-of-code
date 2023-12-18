@@ -31,6 +31,10 @@ add_executable(AOC2023
         day10/SolutionDay10.h
         day10/SolutionDay10.cpp
         day11/SolutionDay11.h
-        day11/SolutionDay11.cpp,
+        day11/SolutionDay11.cpp
         day12/SolutionDay12.h
-        day12/SolutionDay12.cpp)
+        day12/SolutionDay12.cpp
+        day17/SolutionDay17.h
+        day17/SolutionDay17.cpp
+        day18/SolutionDay18.h
+        day18/SolutionDay18.cpp)
