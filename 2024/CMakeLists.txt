@@ -11,4 +11,6 @@ add_executable(AOC2024
         ../cpputil/ReadFileInput.cpp
         day1/SolutionDay1.h
         day1/SolutionDay1.cpp
+        day2/SolutionDay2.h
+        day2/SolutionDay2.cpp
         runner.cpp)
