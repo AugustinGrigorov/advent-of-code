@@ -5,6 +5,7 @@
 #include "day1/SolutionDay1.h"
 #include "day2/SolutionDay2.h"
 #include "day3/SolutionDay3.h"
+#include "day4/SolutionDay4.h"
 #include <iostream>
 
 
@@ -21,5 +22,7 @@ int main() {
     printResults(day2, 2);
     SolutionDay3 day3(ReadFileInput::parseFile("day3/input"));
     printResults(day3, 3);
+    SolutionDay4 day4(ReadFileInput::parseFile("day4/input"));
+    printResults(day4, 4);
     return 0;
 }
