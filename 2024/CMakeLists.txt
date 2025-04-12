@@ -6,7 +6,7 @@ set(CMAKE_COMPILE_WARNING_AS_ERROR ON)
 
 set(SOLVED_PUZZLES 4)
 # Add any skipped puzzles to this list
-list(APPEND SKIPPED_PUZZLES)
+set(SKIPPED_PUZZLES)
 
 add_compile_definitions(_GLIBCXX_DEBUG)
 
@@ -16,12 +16,12 @@ add_executable(AOC2024
         runner.cpp)
 
 # This will automatically add all needed files per solved problem
-set(CURRENT_PUZZLE_EXECUTABLE 1)
-while(CURRENT_PUZZLE_EXECUTABLE LESS_EQUAL SOLVED_PUZZLES)
-        if(NOT CURRENT_PUZZLE_EXECUTABLE IN_LIST SKIPPED_PUZZLES)
+set(PUZZLE_INDEX 1)
+while(PUZZLE_INDEX LESS_EQUAL SOLVED_PUZZLES)
+        if(NOT PUZZLE_INDEX IN_LIST SKIPPED_PUZZLES)
                 target_sources(AOC2024 PRIVATE
-                        day${CURRENT_PUZZLE_EXECUTABLE}/SolutionDay${CURRENT_PUZZLE_EXECUTABLE}.h
-                        day${CURRENT_PUZZLE_EXECUTABLE}/SolutionDay${CURRENT_PUZZLE_EXECUTABLE}.cpp)
+                        day${PUZZLE_INDEX}/SolutionDay${PUZZLE_INDEX}.h
+                        day${PUZZLE_INDEX}/SolutionDay${PUZZLE_INDEX}.cpp)
         endif()
-        math(EXPR CURRENT_PUZZLE_EXECUTABLE "${CURRENT_PUZZLE_EXECUTABLE} + 1")
+        math(EXPR PUZZLE_INDEX "${PUZZLE_INDEX} + 1")
 endwhile()
